@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+  <springProfile name="default">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <Pattern>
+%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+        </Pattern>
+      </layout>
+    </appender>
+    <logger name="com.vf.uk.dal.mockresponder" level="DEBUG" additivity="false">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="com.launchdarkly.sdk.server.LDClient.Evaluation" level="ERROR" additivity="false">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </root>
+  </springProfile>
+
+</configuration>

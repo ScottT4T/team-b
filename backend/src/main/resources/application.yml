@@ -1,0 +1,38 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+      uri: get-cs-uri-from-vsts
+      discovery:
+        enabled: false
+    bus:
+      enabled: false
+      destination: get-kinesis-from-vsts
+    stream:
+      kinesis:
+        binder:
+          locks:
+            table: get-lock-registry-table-from-vsts
+          checkpoint:
+            table: get-metadata-store-table-from-vsts
+cloud:
+  aws:
+    region:
+      static: eu-west-1
+    credentials:
+      instanceProfile: true
+    stack:
+      auto: false
+info:
+  build:
+    version: @project.version@
+    projectName: @project.artifactId@
+server:
+  servlet:
+    context-path: /
+  port: 3333
+  ssl:
+    enabled: false
+logging:
+  pattern:
+    level: "%5p %clr([%mdc]){blue}"

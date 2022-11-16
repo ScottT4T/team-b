@@ -1,0 +1,24 @@
+${AnsiColor.BRIGHT_GREEN}                         __    _
+${AnsiColor.BRIGHT_GREEN}                    _wr""        "-q__
+${AnsiColor.BRIGHT_GREEN}                 _dP                 9m_
+${AnsiColor.BRIGHT_GREEN}               _#P                     9#_
+${AnsiColor.BRIGHT_GREEN}              d#@                       9#m
+${AnsiColor.BRIGHT_GREEN}             d##                         ###
+${AnsiColor.BRIGHT_GREEN}            J###                         ###L
+${AnsiColor.BRIGHT_GREEN}            {###K                       J###K
+${AnsiColor.BRIGHT_GREEN}            ]####K${AnsiColor.RED}      ___aaa___
+${AnsiColor.BRIGHT_GREEN}        __gmM######_${AnsiColor.RED}  w#P""   ""9#m  ${AnsiColor.BRIGHT_GREEN}_d#####Mmw__
+${AnsiColor.BRIGHT_GREEN}     _g##############mZ_         __g##############m_        ${AnsiColor.BRIGHT_GREEN} Build Version:       ${AnsiColor.DEFAULT}@project.version@
+${AnsiColor.BRIGHT_GREEN}   _d####M@PPPP@@M#######Mmp gm#########@@PPP9@M####m_      ${AnsiColor.BRIGHT_GREEN} SpringBoot:          ${AnsiColor.DEFAULT}${spring-boot.version}
+${AnsiColor.BRIGHT_GREEN}  a###""    ${AnsiColor.RED}      ,Z"${AnsiColor.BRIGHT_GREEN}#####@" '######${AnsiColor.RED}"\g          ${AnsiColor.BRIGHT_GREEN}""M##m
+${AnsiColor.BRIGHT_GREEN} J#@"       ${AnsiColor.RED}      0L  ${AnsiColor.BRIGHT_GREEN}"*##     ##@"  ${AnsiColor.RED}J#              ${AnsiColor.BRIGHT_GREEN}*#K
+${AnsiColor.BRIGHT_GREEN} #"         ${AnsiColor.RED}      `#    ${AnsiColor.BRIGHT_GREEN}"_gmwgm_~    ${AnsiColor.RED}dF               ${AnsiColor.BRIGHT_GREEN}`#_
+${AnsiColor.BRIGHT_GREEN}7F          ${AnsiColor.RED}       "#_  ${AnsiColor.BRIGHT_GREEN} ]#####F   ${AnsiColor.RED}_dK                 ${AnsiColor.BRIGHT_GREEN}JE
+${AnsiColor.BRIGHT_GREEN}]           ${AnsiColor.RED}         *m__ ${AnsiColor.BRIGHT_GREEN}##### ${AnsiColor.RED}__g@"                   ${AnsiColor.BRIGHT_GREEN}F
+${AnsiColor.BRIGHT_GREEN}            ${AnsiColor.RED}           "PJ${AnsiColor.BRIGHT_GREEN}#####${AnsiColor.RED}LP"
+${AnsiColor.BRIGHT_GREEN} `                       0######_                      '
+${AnsiColor.BRIGHT_GREEN}                       _0########_
+${AnsiColor.BRIGHT_GREEN}     .               _d#####^#####m__              ,
+${AnsiColor.BRIGHT_GREEN}      "*w_________am#####P"   ~9#####mw_________w*"
+${AnsiColor.BRIGHT_GREEN}          ""9@#####@M""           ""P@#####@M""
+${AnsiColor.DEFAULT}
