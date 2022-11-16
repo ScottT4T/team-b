@@ -1,5 +1,5 @@
-# team-a
-Team A's App
+# team-b
+Team B's App
 
 How to startup this project.
 
