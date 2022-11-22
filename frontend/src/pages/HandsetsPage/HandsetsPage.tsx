@@ -4,20 +4,16 @@ import HandsetsCard from "../../components/HandsetCard";
 
 const HandsetsPage = () => {
   const [handset, sethandset] = useState([] as handSetType[]);
-  const [loading, setLoading] = useState(true);
-  const [hasError, setErrors] = useState(null);
 
   const url = "http://localhost:80/api/handsets";
 
   const fetchHandsets = async () => {
-    await fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        sethandset(res);
-        setLoading(false);
-      })
-      .catch((err) => setErrors(err));
+    fetch(url)
+      .then((response) => response.json())
+      // 4. Setting *dogImage* to the image url that we received from the response above
+      .then((data) => {
+        console.log("backedn data", data);
+      });
   };
   useEffect(() => {
     fetchHandsets();
@@ -25,13 +21,7 @@ const HandsetsPage = () => {
 
   return (
     <div>
-      {loading && !hasError && (
-        <HandsetsCard
-          handsets={handset}
-          loading={loading}
-          hasError={hasError}
-        />
-      )}
+      <HandsetsCard handsets={handset} />
     </div>
   );
 };
