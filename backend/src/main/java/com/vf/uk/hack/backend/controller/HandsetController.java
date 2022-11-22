@@ -17,17 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class BackendController {
+public class HandsetController {
 
   private final ConfigurationRepository repositoryConfiguration;
-
-  @GetMapping("/filter")
-  public HelloWorld filter() {
-    final DBRepository repository = repositoryConfiguration.getRepository();
-    final List<DatabaseDevice> devices = repository.listDevices();
-
-    return new HelloWorld().setHello("world");
-  }
 
   @GetMapping("/handsets")
   public HelloWorld handsets() {
