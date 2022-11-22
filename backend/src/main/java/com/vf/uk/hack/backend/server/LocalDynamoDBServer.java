@@ -115,7 +115,7 @@ public class LocalDynamoDBServer {
               dbItem.setDisplayDescription(device.getDisplayDescription());
               dbItem.setBrand(camelCase(device.getMake()));
               dbItem.setModel(camelCase(device.getModel()));
-              dbItem.setColour(device.getColourName());
+              dbItem.setColour(camelCase(device.getColourName()));
               dbItem.setMemoryInternal(device.getMemory());
               Map<String, String> specMap = RawHandset.Specification.getPrioritySpecificationsMap(device.getSpecification());
               dbItem.setScreenSize(cleanScreenSize(specMap.get("Display Size")));

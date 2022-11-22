@@ -1,8 +1,8 @@
 package com.vf.uk.hack.backend.controller;
 
 import com.vf.uk.hack.backend.configuration.ConfigurationRepository;
-import com.vf.uk.hack.backend.model.HelloWorld;
 import com.vf.uk.hack.backend.model.database.DatabaseDevice;
+import com.vf.uk.hack.backend.model.raw.FilteredItems;
 import com.vf.uk.hack.backend.server.DBRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RestController
@@ -22,36 +23,26 @@ public class FilterController {
   private final ConfigurationRepository repositoryConfiguration;
 
   @GetMapping("/filter")
-  public HelloWorld filter() {
+  public FilteredItems filter() {
     final DBRepository repository = repositoryConfiguration.getRepository();
     final List<DatabaseDevice> devices = repository.listDevices();
+    FilteredItems filteredHandset = new FilteredItems();
+    devices.forEach(databaseDevice -> {
+      add(filteredHandset.getModel(),databaseDevice.getModel());
+      add(filteredHandset.getBrand(),databaseDevice.getBrand());
+      add(filteredHandset.getScreenSize(),databaseDevice.getScreenSize());
+      add(filteredHandset.getMemoryInternal(),databaseDevice.getMemoryInternal());
+      add(filteredHandset.getColour(),databaseDevice.getColour());
+    });
 
-    return new HelloWorld().setHello("world");
+    return filteredHandset;
+
   }
-}
 
-/**
- *     {
- *       "model": [
- *       "Pixel Pro 7",
- *         "Pixel 7",
- *         "iPhone 12"
- *     ],
- *       "brand": [
- *       "Google",
- *         "Apple"
- *     ],
- *       "screenSize": [
- *       "6.1",
- *         "6.2"
- *     ],
- *       "memoryInternal": [
- *       "128GB",
- *         "256GB"
- *     ],
- *       "colour": [
- *       "Black",
- *         "White"
- *     ]
- *     }
- */
+  private void add(Set<String> model, String model1) {
+    if(model1 !=null){
+      model.add(model1);
+    }
+  }
+
+}
