@@ -13,7 +13,7 @@ const HandsetsCard = ({ handsets, loading, hasError }: any) => {
       ) : (
         handsets.map((handset: any) => (
           // console.log('>', handset)
-          <div>{handset.id}</div>
+          <div key={handset.id}>{handset.id}</div>
         ))
       )}
     </>

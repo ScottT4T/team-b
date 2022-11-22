@@ -11,7 +11,7 @@ const HandsetsPage = () => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log("backedn data", data);
+        sethandset(data);
       });
   };
   useEffect(() => {
