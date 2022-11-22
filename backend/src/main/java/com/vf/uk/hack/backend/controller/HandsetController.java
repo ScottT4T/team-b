@@ -38,7 +38,7 @@ public class HandsetController {
       .filter(device -> filter(device.getModel(), request.getModel()))
       .filter(device -> filterColour(device.getColour(), request.getColour()))
       .filter(device -> filter(device.getMemoryInternal(), request.getMemoryInternal()))
-      .filter(device -> filter(device.getScreenSize(), request.getScreenSize()))
+      .filter(device -> filterScreenSize(device.getScreenSize(), request.getScreenSize()))
       .collect(Collectors.toList());
   }
 
