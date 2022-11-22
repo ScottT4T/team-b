@@ -1,0 +1,23 @@
+{
+    "model": [
+        "Pixel Pro 7",
+        "Pixel 7",
+        "iPhone 12"
+    ],
+    "brand": [
+        "Google",
+        "Apple"
+    ],
+    "screenSize": [
+        "6.1",
+        "6.2"
+    ],
+    "memoryInternal": [
+        "128GB",
+        "256GB"
+    ],
+    "colour": [
+        "Black",
+        "White"
+    ]
+}

@@ -1,19 +1,25 @@
-import React, {useState} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import requestJSON from './typescript/RequestJson/RequestJson';
-import { HTTPMethods } from './typescript/RequestJson/Constants';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import requestJSON from "./typescript/RequestJson/RequestJson";
+import { HTTPMethods } from "./typescript/RequestJson/Constants";
+import HandsetsPage from "./pages/HandsetsPage";
+import FilterPanel from "./components/FilterPanel/FilterPanel";
 
 //
 //
 // Response {type: 'basic', url: 'http://localhost/api/hello', redirected: false, status: 200, ok: true, …}
 //
 function App() {
-  const [data, setdata] = useState<any>()
+  const [data, setdata] = useState<any>();
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="content">
+        <FilterPanel />
+        <HandsetsPage />
+      </div>
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <button
           onClick={() => {
@@ -42,7 +48,7 @@ function App() {
           Test UI (fetch /api/hello)
         </button>
         <div id="response">{data}</div>
-      </header>
+      </header> */}
     </div>
   );
 }
