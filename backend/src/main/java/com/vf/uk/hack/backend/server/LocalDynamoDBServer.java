@@ -11,7 +11,7 @@ import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.vf.uk.hack.backend.configuration.ConfigurationDynamoDB;
 import com.vf.uk.hack.backend.configuration.properties.PropertiesMockServer;
-import com.vf.uk.hack.backend.model.database.DatabaseItemEntity;
+import com.vf.uk.hack.backend.model.database.DatabaseDevice;
 import com.vf.uk.hack.backend.model.raw.RawHandset;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
-import java.util.UUID;
 
-import static com.google.common.io.Files.getNameWithoutExtension;
 import static com.vf.uk.hack.backend.utils.MockResponseMapper.readValue;
 import static java.time.LocalDateTime.now;
-import static software.amazon.awssdk.utils.CollectionUtils.toMap;
 
 @Slf4j
 @Configuration
@@ -76,7 +73,7 @@ public class LocalDynamoDBServer {
   private void createTable(final DynamoDBMapper mapper, final DynamoDB dynamoDB) {
     try {
       log.info("DYNAMODB: Create table; please wait...");
-      CreateTableRequest tableRequest = mapper.generateCreateTableRequest(DatabaseItemEntity.class);
+      CreateTableRequest tableRequest = mapper.generateCreateTableRequest(DatabaseDevice.class);
 
       ProvisionedThroughput throughput = new ProvisionedThroughput(1L, 1L);
       tableRequest.setProvisionedThroughput(throughput);
@@ -111,7 +108,7 @@ public class LocalDynamoDBServer {
             RawHandset rawHandset = readValue(file, RawHandset.class);
 
             rawHandset.getDevices().forEach(device -> {
-              DatabaseItemEntity dbItem = new DatabaseItemEntity();
+              DatabaseDevice dbItem = new DatabaseDevice();
               dbItem.setId(device.getDeviceId());
               dbItem.setModifiedTime(now());
               dbItem.setDisplayName(device.getDisplayName());
@@ -120,7 +117,7 @@ public class LocalDynamoDBServer {
               dbItem.setModel(camelCase(device.getModel()));
               dbItem.setColour(device.getColourName());
               dbItem.setMemoryInternal(device.getMemory());
-              Map<String, String> specMap = device.getSpecification().getPrioritySpecificationsMap();
+              Map<String, String> specMap = RawHandset.Specification.getPrioritySpecificationsMap(device.getSpecification());
               dbItem.setScreenSize(cleanScreenSize(specMap.get("Display Size")));
               dynamoDB.save(dbItem);
             });
@@ -138,6 +135,6 @@ public class LocalDynamoDBServer {
   }
 
   private String cleanScreenSize(final String size) {
-    return size.endsWith("inch") ? size.substring(0, size.length()-4) : size;
+    return size != null && size.endsWith("inch") ? size.substring(0, size.length()-4) : size;
   }
 }

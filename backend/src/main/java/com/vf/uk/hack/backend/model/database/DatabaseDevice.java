@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DatabaseItemEntity implements DatabaseEntity {
+public class DatabaseDevice implements DatabaseEntity {
 
   @DynamoDBHashKey
   private String id;

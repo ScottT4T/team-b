@@ -36,9 +36,9 @@ public class RawHandset {
   public static class Specification {
     private List<NameValuePair> prioritySpecifications;
 
-    public Map<String,String> getPrioritySpecificationsMap() {
-      return prioritySpecifications.stream()
-        .collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue));
+    public static Map<String,String> getPrioritySpecificationsMap(final Specification specification) {
+      return specification != null ? specification.getPrioritySpecifications().stream()
+        .collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue)) : Map.of();
     }
   }
 
