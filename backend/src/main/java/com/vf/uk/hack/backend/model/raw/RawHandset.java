@@ -10,7 +10,12 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 public class RawHandset {
-  private List<RawDevice> devices;
+  private List<RawDevices> deviceList;
+
+  @Data
+  public static class RawDevices {
+    private List<RawDevice> devices;
+  }
 
   @Data
   public static class RawDevice {

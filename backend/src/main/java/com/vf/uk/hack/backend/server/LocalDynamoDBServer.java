@@ -107,21 +107,27 @@ public class LocalDynamoDBServer {
           try {
             RawHandset rawHandset = readValue(file, RawHandset.class);
 
-            rawHandset.getDevices().forEach(device -> {
-              DatabaseDevice dbItem = new DatabaseDevice();
-              dbItem.setId(device.getDeviceId());
-              dbItem.setModifiedTime(now());
-              dbItem.setDisplayName(device.getDisplayName());
-              dbItem.setDisplayDescription(device.getDisplayDescription());
-              dbItem.setBrand(camelCase(device.getMake()));
-              dbItem.setModel(camelCase(device.getModel()));
-              dbItem.setColour(camelCase(device.getColourName()));
-              dbItem.setMemoryInternal(device.getMemory());
-              Map<String, String> specMap = RawHandset.Specification.getPrioritySpecificationsMap(device.getSpecification());
-              dbItem.setScreenSize(cleanScreenSize(specMap.get("Display Size")));
-              final Map<String, String> imageMap = RawHandset.ImageURLs.getListOfimageURLsMap(device.getListOfimageURLs());
-              dbItem.setImageURL("https://cdn.vodafone.co.uk/en/assets" + imageMap.get("imageURLs.full.hero"));
-              dynamoDB.save(dbItem);
+            rawHandset.getDeviceList().forEach(deviceList -> {
+              deviceList.getDevices().forEach(device -> {
+                final Map<String, String> specMap = RawHandset.Specification.getPrioritySpecificationsMap(device.getSpecification());
+                final Map<String, String> imageMap = RawHandset.ImageURLs.getListOfimageURLsMap(device.getListOfimageURLs());
+
+                if(device.getColourName() != null &&
+                   !specMap.get("Display Size").contains("+")) {
+                  DatabaseDevice dbItem = new DatabaseDevice();
+                  dbItem.setId(device.getDeviceId());
+                  dbItem.setModifiedTime(now());
+                  dbItem.setDisplayName(device.getDisplayName());
+                  dbItem.setDisplayDescription(device.getDisplayDescription());
+                  dbItem.setBrand(camelCase(device.getMake()));
+                  dbItem.setModel(camelCase(device.getModel()));
+                  dbItem.setColour(camelCase(device.getColourName()));
+                  dbItem.setMemoryInternal(device.getMemory());
+                  dbItem.setScreenSize(cleanScreenSize(specMap.get("Display Size")));
+                  dbItem.setImageURL("https://cdn.vodafone.co.uk/en/assets" + imageMap.get("imageURLs.full.hero"));
+                  dynamoDB.save(dbItem);
+                }
+              });
             });
 
           } catch (final IOException e) {

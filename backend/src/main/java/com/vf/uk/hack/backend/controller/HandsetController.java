@@ -16,6 +16,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.vf.uk.hack.backend.utils.ColourNames.findColorNameByColor;
+import static com.vf.uk.hack.backend.utils.ScreenSizeRounding.roundScreenSize;
+
 @Slf4j
 @RestController
 @RequestMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,10 +36,20 @@ public class HandsetController {
     return devices.stream()
       .filter(device -> filter(device.getBrand(), request.getBrand()))
       .filter(device -> filter(device.getModel(), request.getModel()))
-      .filter(device -> filter(device.getColour(), request.getColour()))
+      .filter(device -> filterColour(device.getColour(), request.getColour()))
       .filter(device -> filter(device.getMemoryInternal(), request.getMemoryInternal()))
       .filter(device -> filter(device.getScreenSize(), request.getScreenSize()))
       .collect(Collectors.toList());
+  }
+
+  private boolean filterScreenSize(String size, String requestElement) {
+    final String deviceSize = roundScreenSize(size);
+    return filter(deviceSize, requestElement);
+  }
+
+  private boolean filterColour(String colour, String requestElement) {
+    final String deviceColour = findColorNameByColor(colour);
+    return filter(deviceColour, requestElement);
   }
 
   private boolean filter(final String deviceElement, final String requestElement) {
@@ -46,7 +59,7 @@ public class HandsetController {
 
     final String[] requestElements = requestElement.split(",");
     for (String element : requestElements) {
-      if(deviceElement.equals(element)) {
+      if(deviceElement.contains(element)) {
         return true;
       }
     }

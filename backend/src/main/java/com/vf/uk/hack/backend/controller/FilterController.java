@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Set;
 
+import static com.vf.uk.hack.backend.utils.ColourNames.findColorNameByColor;
+import static com.vf.uk.hack.backend.utils.ScreenSizeRounding.roundScreenSize;
+
 @Slf4j
 @RestController
 @RequestMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -30,9 +33,9 @@ public class FilterController {
     devices.forEach(databaseDevice -> {
       add(filteredHandset.getModel(),databaseDevice.getModel());
       add(filteredHandset.getBrand(),databaseDevice.getBrand());
-      add(filteredHandset.getScreenSize(),databaseDevice.getScreenSize());
+      add(filteredHandset.getScreenSize(),roundScreenSize(databaseDevice.getScreenSize()));
       add(filteredHandset.getMemoryInternal(),databaseDevice.getMemoryInternal());
-      add(filteredHandset.getColour(),databaseDevice.getColour());
+      add(filteredHandset.getColour(), findColorNameByColor(databaseDevice.getColour()));
     });
 
     return filteredHandset;

@@ -32,6 +32,12 @@ public class FilteredItems {
   public class MemoryComparator implements Comparator<String> {
     @Override
     public int compare(String o1, String o2) {
+      if(o1.endsWith("TB")) {
+        o1 = o1.substring(0, o1.length()-2) + "000";
+      }
+      if(o2.endsWith("TB")) {
+        o2 = o2.substring(0, o2.length()-2) + "000";
+      }
       if(o1.endsWith("GB")) {
         o1 = o1.substring(0, o1.length()-2);
       }
