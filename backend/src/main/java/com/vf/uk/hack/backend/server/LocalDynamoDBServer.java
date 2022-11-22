@@ -119,6 +119,8 @@ public class LocalDynamoDBServer {
               dbItem.setMemoryInternal(device.getMemory());
               Map<String, String> specMap = RawHandset.Specification.getPrioritySpecificationsMap(device.getSpecification());
               dbItem.setScreenSize(cleanScreenSize(specMap.get("Display Size")));
+              final Map<String, String> imageMap = RawHandset.ImageURLs.getListOfimageURLsMap(device.getListOfimageURLs());
+              dbItem.setImageURL("https://cdn.vodafone.co.uk/en/assets" + imageMap.get("imageURLs.full.hero"));
               dynamoDB.save(dbItem);
             });
 

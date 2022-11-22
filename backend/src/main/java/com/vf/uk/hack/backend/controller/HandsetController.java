@@ -1,7 +1,6 @@
 package com.vf.uk.hack.backend.controller;
 
 import com.vf.uk.hack.backend.configuration.ConfigurationRepository;
-import com.vf.uk.hack.backend.model.HelloWorld;
 import com.vf.uk.hack.backend.model.database.DatabaseDevice;
 import com.vf.uk.hack.backend.server.DBRepository;
 import lombok.AllArgsConstructor;
@@ -22,11 +21,10 @@ public class HandsetController {
   private final ConfigurationRepository repositoryConfiguration;
 
   @GetMapping("/handsets")
-  public HelloWorld handsets() {
+  public List<DatabaseDevice> handsets() {
     final DBRepository repository = repositoryConfiguration.getRepository();
     final List<DatabaseDevice> devices = repository.listDevices();
 
-    log.info("Hello Called!");
-    return new HelloWorld().setHello("world");
+    return devices;
   }
 }

@@ -30,6 +30,11 @@ public class RawHandset {
   public static class ImageURLs {
     private String imageName;
     private String imageURL;
+
+    public static Map<String,String> getListOfimageURLsMap(final List<ImageURLs> imageURLsList) {
+      return imageURLsList != null ? imageURLsList.stream()
+        .collect(Collectors.toMap(ImageURLs::getImageName, ImageURLs::getImageURL)) : Map.of();
+    }
   }
 
   @Data
