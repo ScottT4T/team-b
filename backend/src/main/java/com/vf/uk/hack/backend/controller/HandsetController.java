@@ -27,7 +27,7 @@ public class HandsetController {
 
   private final ConfigurationRepository repositoryConfiguration;
 
-  @GetMapping("/handsets")
+  @GetMapping("/api/handsets")
   public List<DatabaseDevice> handsets(
     final @Valid @ModelAttribute FilterRequest request) {
     final DBRepository repository = repositoryConfiguration.getRepository();

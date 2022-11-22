@@ -25,7 +25,7 @@ public class FilterController {
 
   private final ConfigurationRepository repositoryConfiguration;
 
-  @GetMapping("/filter")
+  @GetMapping("/api/filter")
   public FilteredItems filter() {
     final DBRepository repository = repositoryConfiguration.getRepository();
     final List<DatabaseDevice> devices = repository.listDevices();
