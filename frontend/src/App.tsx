@@ -3,7 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import requestJSON from "./typescript/RequestJson/RequestJson";
 import { HTTPMethods } from "./typescript/RequestJson/Constants";
-import HandsetsPage from './pages/HandsetsPage';
+import HandsetsPage from "./pages/HandsetsPage";
+import FilterPanel from "./components/FilterPanel/FilterPanel";
 
 //
 //
@@ -14,7 +15,10 @@ function App() {
 
   return (
     <div className="App">
-      <HandsetsPage />
+      <div className="content">
+        <FilterPanel />
+        <HandsetsPage />
+      </div>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <button

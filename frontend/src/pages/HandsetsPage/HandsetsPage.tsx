@@ -25,4 +25,4 @@ const HandsetsPage = () => {
   );
 };
 
-export default HandsetsPage;
+export default React.memo(HandsetsPage);
