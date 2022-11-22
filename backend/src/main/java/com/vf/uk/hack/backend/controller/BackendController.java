@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
 public class BackendController {
 
-  @GetMapping("**")
-  public HelloWorld getHelloWorld() {
+  @GetMapping("/filter")
+  public HelloWorld filter() {
+    log.info("Hello Called!");
+    return new HelloWorld().setHello("world");
+  }
+
+  @GetMapping("/handsets")
+  public HelloWorld handsets() {
     log.info("Hello Called!");
     return new HelloWorld().setHello("world");
   }

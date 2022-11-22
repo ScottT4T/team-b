@@ -20,5 +20,19 @@ public class DatabaseItemEntity implements DatabaseEntity {
   private LocalDateTime modifiedTime;
 
   @DynamoDBAttribute
-  private String productGroupName;
+  private String displayName;
+  @DynamoDBAttribute
+  private String displayDescription;
+  @DynamoDBAttribute
+  private String brand;
+  @DynamoDBAttribute
+  private String model;
+  @DynamoDBAttribute
+  private String screenSize;
+  @DynamoDBAttribute
+  private String memoryInternal;
+  @DynamoDBAttribute
+  private String colour;
+  @DynamoDBAttribute
+  private String imageURL;
 }

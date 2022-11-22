@@ -12,18 +12,23 @@ import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.vf.uk.hack.backend.configuration.ConfigurationDynamoDB;
 import com.vf.uk.hack.backend.configuration.properties.PropertiesMockServer;
 import com.vf.uk.hack.backend.model.database.DatabaseItemEntity;
+import com.vf.uk.hack.backend.model.raw.RawHandset;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.text.CaseUtils;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Map;
+import java.util.UUID;
 
 import static com.google.common.io.Files.getNameWithoutExtension;
 import static com.vf.uk.hack.backend.utils.MockResponseMapper.readValue;
 import static java.time.LocalDateTime.now;
+import static software.amazon.awssdk.utils.CollectionUtils.toMap;
 
 @Slf4j
 @Configuration
@@ -103,15 +108,36 @@ public class LocalDynamoDBServer {
         } else {
           final String key = file.getName();
           try {
-            DatabaseItemEntity item = readValue(file, DatabaseItemEntity.class);
-            item.setId(getNameWithoutExtension(file.getName()));
-            item.setModifiedTime(now());
-            dynamoDB.save(item);
+            RawHandset rawHandset = readValue(file, RawHandset.class);
+
+            rawHandset.getDevices().forEach(device -> {
+              DatabaseItemEntity dbItem = new DatabaseItemEntity();
+              dbItem.setId(device.getDeviceId());
+              dbItem.setModifiedTime(now());
+              dbItem.setDisplayName(device.getDisplayName());
+              dbItem.setDisplayDescription(device.getDisplayDescription());
+              dbItem.setBrand(camelCase(device.getMake()));
+              dbItem.setModel(camelCase(device.getModel()));
+              dbItem.setColour(device.getColourName());
+              dbItem.setMemoryInternal(device.getMemory());
+              Map<String, String> specMap = device.getSpecification().getPrioritySpecificationsMap();
+              dbItem.setScreenSize(cleanScreenSize(specMap.get("Display Size")));
+              dynamoDB.save(dbItem);
+            });
+
           } catch (final IOException e) {
             log.error("IOException while putting file {} -> dynamoDB://{}/{}", file, tableName, key, e);
           }
         }
       }
     }
+  }
+
+  private String camelCase(final String text) {
+    return CaseUtils.toCamelCase(text, true, ' ');
+  }
+
+  private String cleanScreenSize(final String size) {
+    return size.endsWith("inch") ? size.substring(0, size.length()-4) : size;
   }
 }
