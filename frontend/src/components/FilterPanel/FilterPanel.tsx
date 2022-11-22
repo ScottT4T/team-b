@@ -57,41 +57,47 @@ const FilterPanel = () => {
   }
 
   function getOnChange(checked: boolean, nodes: RenderTree) {
+    console.log("selected", checked, nodes);
     const allNode: string[] = getChildById(data, nodes.id);
     let array = checked
       ? [...selected, ...allNode]
       : selected.filter((value) => !allNode.includes(value));
 
     array = array.filter((v, i) => array.indexOf(v) === i);
-
+    console.log("selected", array);
     setSelected(array);
   }
 
-  const renderTree = (nodes: any) => (
-    <TreeItem
-      key={nodes.id}
-      nodeId={nodes.id}
-      label={
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={selected.some((item) => item === nodes.id)}
-              onChange={(event) =>
-                getOnChange(event.currentTarget.checked, nodes)
-              }
-              onClick={(e) => e.stopPropagation()}
-            />
-          }
-          label={<>{nodes.name}</>}
-          key={nodes.id}
-        />
-      }
-    >
-      {Array.isArray(nodes.children)
-        ? nodes.children.map((node: any) => renderTree(node))
-        : null}
-    </TreeItem>
-  );
+  const renderTree = (nodes: any) =>
+    nodes.id ? (
+      <TreeItem
+        key={nodes.id}
+        nodeId={nodes.id}
+        label={
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={selected.some((item) => {
+                  console.log("item", item);
+                  return item === nodes.id;
+                })}
+                onChange={(event) => {
+                  console.log(nodes);
+                  getOnChange(event.currentTarget.checked, nodes);
+                }}
+                onClick={(e) => e.stopPropagation()}
+              />
+            }
+            label={<>{nodes.name}</>}
+            key={nodes.id}
+          />
+        }
+      >
+        {Array.isArray(nodes.children)
+          ? nodes.children.map((node: any) => renderTree(node))
+          : null}
+      </TreeItem>
+    ) : null;
 
   const dataTreeMapper = (data: any) => {
     let childrenData = [];

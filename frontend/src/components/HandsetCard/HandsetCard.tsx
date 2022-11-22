@@ -10,23 +10,21 @@ const HandsetsCard = ({ handsets, loading, hasError }: any) => {
         <h1>Loading</h1>
       ) : (
         handsets.map((handset: any) => (
-          <>
-            <div className="card">
-              <div className="card-content">
-                <img
-                  className="imageCard"
-                  src={handset.imageURL}
-                  alt={handsets.displayName}
-                />
-              </div>
-              <div className="card-content">
-                <p className="secondaryText">{handset.brand}</p>
-                <h4 className="titleText">{handset.displayName}</h4>
-                <h4 className="titleText">{handset.memoryInternal}</h4>
-                <p className="secondaryText">{handset.displayDescription}</p>
-              </div>
+          <div className="card" key={handset.id}>
+            <div className="card-content">
+              <img
+                className="imageCard"
+                src={handset.imageURL}
+                alt={handsets.displayName}
+              />
             </div>
-          </>
+            <div className="card-content">
+              <p className="secondaryText">{handset.brand}</p>
+              <h4 className="titleText">{handset.displayName}</h4>
+              <h4 className="titleText">{handset.memoryInternal}</h4>
+              <p className="secondaryText">{handset.displayDescription}</p>
+            </div>
+          </div>
         ))
       )}
     </>
