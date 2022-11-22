@@ -10,7 +10,6 @@ const HandsetsPage = () => {
   const fetchHandsets = async () => {
     fetch(url)
       .then((response) => response.json())
-      // 4. Setting *dogImage* to the image url that we received from the response above
       .then((data) => {
         console.log("backedn data", data);
       });
