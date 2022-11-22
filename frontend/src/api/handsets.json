@@ -1,0 +1,18 @@
+[
+    {
+        "brand": "Google",
+        "model": "Pixel 7 Pro",
+        "screenSize": "6.1",
+        "memoryInternal": "256GB",
+        "colour": "Black",
+        "imageURL": "http://imageurl.com"
+    },
+    {
+        "brand": "Google",
+        "model": "Pixel 7 Pro",
+        "screenSize": "6.1",
+        "memoryInternal": "256GB",
+        "colour": "Black",
+        "imageURL": "http://imageurl.com"
+    }
+]
